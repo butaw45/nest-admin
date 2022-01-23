@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
@@ -15,5 +16,7 @@ export class User{
     email:string;
 
     @Column()
+    //? @Exclude() supaya password tersave tanpa di tampilkan pada response API dengan bantuan UseInterceptors(ClassSerializerInterceptor) 
+    @Exclude()
     password:string;
 }

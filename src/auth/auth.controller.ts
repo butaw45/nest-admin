@@ -1,10 +1,12 @@
-import { BadRequestException, Body, Controller, NotFoundException, Post, Res, Get, Req } from '@nestjs/common';
+import { BadRequestException, Body, Controller, NotFoundException, Post, Res, Get, Req, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcryptjs';
 import { RegisterDto } from './models/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
 
+//? UseInterceptors(ClassSerializerInterceptor) Agar tidak menampilkan password pada response API  
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller()
 export class AuthController {
 
@@ -53,6 +55,7 @@ export class AuthController {
        
     }
 
+    
     @Get('user')
     async user(@Req() request: Request){
         const cookie = request.cookies['jwt'];
@@ -61,4 +64,5 @@ export class AuthController {
 
         return this.userService.findOne({id:data['id']});
     }
+    
 }
