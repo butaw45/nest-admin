@@ -30,6 +30,8 @@ export class AuthController {
             last_name: body.last_name,
             email: body.email,
             password: hashed,
+            // Role 1 = admin | 2 = user | 3 = guest sesuaikan dengan role yang ada di database
+            role: {id: 2}
         });
     }
 
