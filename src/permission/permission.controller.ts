@@ -1,14 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
 import { PermissionService } from './permission.service';
+import { HasPermission } from './has-permission.decorator';
 
-@Controller('permission')
+@Controller('permissions')
 export class PermissionController {
-    constructor(private permissionService: PermissionService){
+    constructor(private permissionService: PermissionService) {}
 
-    }
-    
     @Get()
-    async all(){
+    @HasPermission('view_permissions')
+    async all() {
         return this.permissionService.all();
     }
 }
